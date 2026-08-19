@@ -1,0 +1,30 @@
+{
+  "name": "probe-275ab6",
+  "purpose": "A one-page guestbook: visitors type a short message and see the wall of all messages, newest first.",
+  "actors": [
+    "Visitor (no account needed)"
+  ],
+  "entities": [
+    {
+      "name": "Message",
+      "relationships": [
+        "belongs to no user — anonymous guest entry",
+        "has author name (optional, defaults to Anonymous)",
+        "has body text (required, short)"
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "name": "Leave a message",
+      "description": "Visitor types a short message (with optional name) and submits it from the single page."
+    },
+    {
+      "name": "View the wall",
+      "description": "The page lists all messages newest first, with author and time."
+    }
+  ],
+  "modules": [],
+  "integrations": [],
+  "seed_demo": "Three or four friendly placeholder guestbook entries from different authors so the wall doesn't look empty on first load."
+}
