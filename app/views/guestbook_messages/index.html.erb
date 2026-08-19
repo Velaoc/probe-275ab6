@@ -1,0 +1,48 @@
+<% title "The Guestbook" %>
+
+<section class="md-section" aria-labelledby="guestbook-title">
+  <div class="md-section__inner md-section__inner--narrow">
+    <p class="md-section__eyebrow">Sign the wall</p>
+    <h1 id="guestbook-title">The guestbook</h1>
+    <p>Leave a short message for whoever comes next.</p>
+
+    <%= md_card variant: :filled do %>
+      <%= form_with model: @message, url: guestbook_messages_path, class: "guestbook-form" do |form| %>
+        <%= md_text_field form, :name, label: "Your name",
+              hint: "Optional — defaults to Anonymous", maxlength: GuestbookMessage::MAX_NAME_LENGTH %>
+        <div class="md-field <%= "md-field--error" if @message.errors[:body].any? %>">
+          <%= form.label :body, "Message", class: "md-field__label" %>
+          <%= form.text_area :body, rows: 3, maxlength: GuestbookMessage::MAX_BODY_LENGTH,
+                class: "md-field__input",
+                aria: { invalid: @message.errors[:body].any?, describedby: "guestbook_message_body_hint" } %>
+          <% if @message.errors[:body].any? %>
+            <p class="md-field__support" id="guestbook_message_body_hint"><%= @message.errors[:body].to_sentence %></p>
+          <% else %>
+            <p class="md-field__support" id="guestbook_message_body_hint">Required — keep it short.</p>
+          <% end %>
+        </div>
+        <%= md_button "Post to the wall", type: :submit, icon: :send %>
+      <% end %>
+    <% end %>
+  </div>
+</section>
+
+<section class="md-section" aria-labelledby="wall-title">
+  <div class="md-section__inner">
+    <h2 id="wall-title">The wall</h2>
+    <% if @messages.any? %>
+      <ol class="guestbook-wall">
+        <% @messages.each do |message| %>
+          <li>
+            <%= md_card variant: :outlined do %>
+              <p class="guestbook-message__body"><%= message.body %></p>
+              <p class="guestbook-message__meta"><%= message.author %> · <%= time_ago_in_words(message.created_at) %> ago</p>
+            <% end %>
+          </li>
+        <% end %>
+      </ol>
+    <% else %>
+      <p class="md-empty">No messages yet — be the first to sign the wall.</p>
+    <% end %>
+  </div>
+</section>
