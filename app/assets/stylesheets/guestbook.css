@@ -1,0 +1,44 @@
+/* Guestbook product styles — layered on the foundation's Material Design 3
+   tokens. Chrome (cards, fields, buttons, spacing) comes from the framework;
+   this file only shapes the guestbook's own pieces: the compose form and the
+   wall list. */
+
+.md-section__inner--narrow {
+  max-width: 40rem;
+}
+
+/* Compose form: keep the card tidy. */
+.guestbook-form {
+  display: grid;
+  gap: 1rem;
+}
+
+/* The wall: a numbered list of message cards. */
+.guestbook-wall {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+  max-width: 48rem;
+}
+
+.guestbook-wall .md-card {
+  height: 100%;
+}
+
+.guestbook-message__body {
+  margin: 0 0 0.5rem;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.guestbook-message__meta {
+  margin: 0;
+  font-size: 0.875rem;
+  opacity: 0.75;
+}
+
+.md-empty {
+  color: var(--md-sys-color-on-surface-variant, inherit);
+}
